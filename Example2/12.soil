@@ -1,0 +1,14 @@
+!new Choreographer('Ch');
+!new aACh ('a');
+!new bBCh ('b');
+!insert (a, Ch) into RelChAa;
+!insert (b, a) into RelChExtAab;
+!insert (b, Ch) into RelChBb;
+!insert (a, b) into RelChExtBba;
+-- EXTRA CONNECTIONS HERE
+
+
+--
+!Ch.bAa();
+!Ch.bAa();
+!Ch.aBb();

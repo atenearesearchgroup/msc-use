@@ -1,0 +1,19 @@
+msc Example1
+(inst c:Client, s:Server)
+c, s : loop<1,3> begin loop1;
+    c : call serviceA() to s;
+    s : receive serviceA() from c;
+    s : replyout serviceA() to c;
+    c : replyin serviceA() from s;
+    c, s : opt begin opt1;
+        c : call serviceB() to s ;
+        s : receive serviceB() from c;
+        s : replyout serviceB() to c;
+        c : replyin serviceB() from s;
+    opt end;
+loop end;
+c : call serviceC() to s;
+s : receive serviceC() from c;
+s : replyout serviceC() to c;
+c : replyin serviceC() from s;
+endmsc;
