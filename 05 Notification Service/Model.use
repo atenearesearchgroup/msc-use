@@ -1,0 +1,28 @@
+model NotificationServiceSystem
+class User
+attributes
+
+operations
+notify() begin end
+
+class NotificationService
+attributes
+
+operations
+subscribe() begin end
+unsubscribe() begin end
+event() begin end
+
+class Provider
+attributes
+operations
+
+association RelUserNotService between
+User [0..*] role user
+NotificationService [0..*] role notificationservice
+end
+
+association RelNotServiceProvider between
+NotificationService [0..*] role notificationservice
+Provider [0..*] role provider
+end

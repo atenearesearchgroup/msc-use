@@ -1,0 +1,22 @@
+model LibrarySystem
+class Borrower
+attributes
+debt : Integer init Integer(0)
+
+operations
+
+fine(amount : Integer)
+    begin
+        self.debt:=self.debt+amount;
+    end
+end
+
+class Library
+attributes
+
+operations
+
+borrow(b : Book): Boolean 
+    begin 
+    
+    end

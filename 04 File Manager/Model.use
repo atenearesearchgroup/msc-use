@@ -24,56 +24,56 @@ class Choreographer
 attributes
 
 operations
-user_File_read()
+file_read(id : String)
 begin
-self.user.user_File_read();
+(self.user->any(ins: User_Ch | ins.id = id)).file_read();
 end
 
-user_File_close()
+file_close(id : String)
 begin
-self.user.user_File_close();
+(self.user->any(ins: User_Ch | ins.id = id)).file_close();
 end
 
-user_File_open()
+file_open(id : String)
 begin
-self.user.user_File_open();
+(self.user->any(ins: User_Ch | ins.id = id)).file_open();
 end
 
-user_File_write()
+file_write(id : String)
 begin
-self.user.user_File_write();
+(self.user->any(ins: User_Ch | ins.id = id)).file_write();
 end
 
 end
 
-class user_User_Ch < User
+class User_Ch < User
 attributes
-
+id : String
 operations
-user_File_read()
+file_read()
 begin
 self.file.read();
 end
 
-user_File_close()
+file_close()
 begin
 self.file.close();
 end
 
-user_File_open()
+file_open()
 begin
 self.file.open();
 end
 
-user_File_write()
+file_write()
 begin
 self.file.write();
 end
 
 end
 
-association Rel_user_User_Ch between
-user_User_Ch [0..1] role user
-Choreographer [0..1] role ch
+association Rel_User_Ch between
+User_Ch [0..*] role user
+Choreographer [0..*] role ch
 end
 
