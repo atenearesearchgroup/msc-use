@@ -1,0 +1,14 @@
+!new Server ('s');
+!new Choreographer('Ch');
+!new c_Client_Ch ('c');
+!insert (c, Ch) into Rel_c_Client_Ch;
+-- EXTRA CONNECTIONS HERE
+
+
+--
+!Ch.c_S_serviceA();
+!Ch.c_S_serviceA();
+!Ch.c_S_serviceB();
+!Ch.c_S_serviceA();
+!Ch.c_S_serviceB();
+!Ch.c_S_serviceC();

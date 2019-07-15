@@ -19,58 +19,54 @@ end
 
 
 association RelClientServer between
-Client [0..1] role client
-Server [0..1] role server
+Client [0..1] role c
+Server [0..1] role s
 end
 
 class Choreographer
 attributes
 
 operations
-cSserviceC()
+c_S_serviceC()
 begin
-self.c.cSserviceC();
+self.c.c_S_serviceC();
 end
 
-cSserviceB()
+c_S_serviceB()
 begin
-self.c.cSserviceB();
+self.c.c_S_serviceB();
 end
 
-cSserviceA()
+c_S_serviceA()
 begin
-self.c.cSserviceA();
+self.c.c_S_serviceA();
 end
 
 end
 
-class cClientCh < Client
+class c_Client_Ch < Client
 attributes
+
 operations
-cSserviceC()
+c_S_serviceC()
 begin
 self.s.serviceC();
 end
 
-cSserviceB()
+c_S_serviceB()
 begin
 self.s.serviceB();
 end
 
-cSserviceA()
+c_S_serviceA()
 begin
 self.s.serviceA();
 end
 
 end
 
-association RelChClientc between
-cClientCh [0..1] role c
+association Rel_c_Client_Ch between
+c_Client_Ch [0..1] role c
 Choreographer [0..1] role ch
-end
-
-association RelChExtClientcs between
-Server [0..1] role s
-cClientCh [0..1] role cch
 end
 

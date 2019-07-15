@@ -1,0 +1,47 @@
+class Choreographer
+attributes
+
+operations
+c_S_serviceC()
+begin
+self.c.c_S_serviceC();
+end
+
+c_S_serviceB()
+begin
+self.c.c_S_serviceB();
+end
+
+c_S_serviceA()
+begin
+self.c.c_S_serviceA();
+end
+
+end
+
+class c_Client_Ch < Client
+attributes
+
+operations
+c_S_serviceC()
+begin
+self.s.serviceC();
+end
+
+c_S_serviceB()
+begin
+self.s.serviceB();
+end
+
+c_S_serviceA()
+begin
+self.s.serviceA();
+end
+
+end
+
+association Rel_c_Client_Ch between
+c_Client_Ch [0..1] role c
+Choreographer [0..1] role ch
+end
+
