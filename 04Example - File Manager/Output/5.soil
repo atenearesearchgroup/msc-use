@@ -1,0 +1,13 @@
+reset
+!new File ('file');
+!new Choreographer('Ch');
+!new user_User_Ch ('user');
+!insert (user, Ch) into Rel_user_User_Ch;
+-- EXTRA CONNECTIONS HERE
+
+
+--
+!Ch.user_File_open();
+!Ch.user_File_write();
+!Ch.user_File_write();
+!Ch.user_File_close();

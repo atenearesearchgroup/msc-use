@@ -1,16 +1,17 @@
 reset
 !new Server ('s');
 !new Choreographer('Ch');
-!new c_Client_Ch ('c');
-!insert (c, Ch) into Rel_c_Client_Ch;
+!new Client_Ch ('c');
+!c.id := 'c';
+!insert (c, Ch) into Rel_Client_Ch;
 -- EXTRA CONNECTIONS HERE
 
 
 --
-!Ch.c_S_serviceA();
-!Ch.c_S_serviceB();
-!Ch.c_S_serviceA();
-!Ch.c_S_serviceB();
-!Ch.c_S_serviceA();
-!Ch.c_S_serviceB();
-!Ch.c_S_serviceC();
+!Ch.server_serviceA('c');
+!Ch.server_serviceB('c');
+!Ch.server_serviceA('c');
+!Ch.server_serviceB('c');
+!Ch.server_serviceA('c');
+!Ch.server_serviceB('c');
+!Ch.server_serviceC('c');

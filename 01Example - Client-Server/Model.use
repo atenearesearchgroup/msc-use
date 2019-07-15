@@ -19,54 +19,54 @@ end
 
 
 association RelClientServer between
-Client [0..1] role c
-Server [0..1] role s
+Client [0..*] role client
+Server [0..1] role server
 end
 
 class Choreographer
 attributes
 
 operations
-c_S_serviceC()
+server_serviceC(id : String)
 begin
-self.c.c_S_serviceC();
+(self.client->any(ins: Client_Ch | ins.id = id)).server_serviceC();
 end
 
-c_S_serviceB()
+server_serviceA(id : String)
 begin
-self.c.c_S_serviceB();
+(self.client->any(ins: Client_Ch | ins.id = id)).server_serviceA();
 end
 
-c_S_serviceA()
+server_serviceB(id : String)
 begin
-self.c.c_S_serviceA();
+(self.client->any(ins: Client_Ch | ins.id = id)).server_serviceB();
 end
 
 end
 
-class c_Client_Ch < Client
+class Client_Ch < Client
 attributes
-
+id : String
 operations
-c_S_serviceC()
+server_serviceC()
 begin
-self.s.serviceC();
+self.server.serviceC();
 end
 
-c_S_serviceB()
+server_serviceA()
 begin
-self.s.serviceB();
+self.server.serviceA();
 end
 
-c_S_serviceA()
+server_serviceB()
 begin
-self.s.serviceA();
+self.server.serviceB();
 end
 
 end
 
-association Rel_c_Client_Ch between
-c_Client_Ch [0..1] role c
-Choreographer [0..1] role ch
+association Rel_Client_Ch between
+Client_Ch [0..*] role client
+Choreographer [0..*] role ch
 end
 

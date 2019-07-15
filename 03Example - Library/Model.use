@@ -1,0 +1,15 @@
+model Library
+class Borrower
+attributes
+debt : Integer
+
+init
+    self.debt = 0
+
+operations
+
+fine(amount : Integer)
+    begin
+        self.debt:=self.debt+amount;
+    end
+end

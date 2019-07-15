@@ -1,0 +1,24 @@
+msc Example4
+(inst user:User, file:File)
+user: call open() to file;
+file: receive open() from user;
+file: replyout open() to user;
+user: replyin open() from file;
+user, file: loop<1,2> begin loop1 ;
+	user, file: alt begin alt1;
+		user: call read() to file;
+		file: receive read() from user;
+		file: replyout read() to user;
+		user: replyin read() from file;
+	alt;
+        user: call write() to file;
+		file: receive write() from user;
+		file: replyout write() to user;
+		user: replyin write() from file;
+	alt end;
+loop end;
+user: call close() to file;
+file: receive close() from user;
+file: replyout close() to user;
+user: replyin close() from file;
+endmsc;

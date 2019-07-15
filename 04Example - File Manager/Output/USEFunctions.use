@@ -1,0 +1,57 @@
+class Choreographer
+attributes
+
+operations
+user_File_read()
+begin
+self.user.user_File_read();
+end
+
+user_File_close()
+begin
+self.user.user_File_close();
+end
+
+user_File_open()
+begin
+self.user.user_File_open();
+end
+
+user_File_write()
+begin
+self.user.user_File_write();
+end
+
+end
+
+class user_User_Ch < User
+attributes
+
+operations
+user_File_read()
+begin
+self.file.read();
+end
+
+user_File_close()
+begin
+self.file.close();
+end
+
+user_File_open()
+begin
+self.file.open();
+end
+
+user_File_write()
+begin
+self.file.write();
+end
+
+end
+
+association Rel_user_User_Ch between
+user_User_Ch [0..1] role user
+Choreographer [0..1] role ch
+end
+
