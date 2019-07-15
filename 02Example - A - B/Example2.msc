@@ -1,0 +1,16 @@
+msc Example2
+(inst a:A, b:B)
+a, b: loop<1,2> begin loop1 ;
+	a, b: alt begin alt1;
+		a: call opB() to b;
+		b: receive opB() from a;
+		b: replyout opB() to a;
+		a: replyin opB() from b;
+	alt;
+		b: call opA() to a;
+		a: receive opA() from b;
+		a: replyout opA() to b;
+		b: replyin opA() from a;
+	alt end;
+loop end;
+endmsc;

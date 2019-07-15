@@ -1,3 +1,4 @@
+reset
 !new Server ('s');
 !new Choreographer('Ch');
 !new c_Client_Ch ('c');

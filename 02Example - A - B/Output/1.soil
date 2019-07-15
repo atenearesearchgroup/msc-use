@@ -1,0 +1,10 @@
+!new Choreographer('Ch');
+!new a_A_Ch ('a');
+!new b_B_Ch ('b');
+!insert (a, Ch) into Rel_a_A_Ch;
+!insert (b, Ch) into Rel_b_B_Ch;
+-- EXTRA CONNECTIONS HERE
+
+
+--
+!Ch.b_A_opA();

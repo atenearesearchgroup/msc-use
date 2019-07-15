@@ -1,0 +1,68 @@
+model Example2
+class A
+attributes
+
+operations
+opA() begin end
+end
+
+class B
+attributes
+
+operations
+opB() begin end
+end
+
+association RelAB between
+A [0..1] role a
+B [0..1] role b
+end
+
+class Choreographer
+attributes
+
+operations
+a_B_opB()
+begin
+self.a.a_B_opB();
+end
+
+b_A_opA()
+begin
+self.b.b_A_opA();
+end
+
+end
+
+class a_A_Ch < A
+attributes
+
+operations
+a_B_opB()
+begin
+self.b.opB();
+end
+
+end
+
+class b_B_Ch < B
+attributes
+
+operations
+b_A_opA()
+begin
+self.a.opA();
+end
+
+end
+
+association Rel_a_A_Ch between
+a_A_Ch [0..1] role a
+Choreographer [0..1] role ch
+end
+
+association Rel_b_B_Ch between
+b_B_Ch [0..1] role b
+Choreographer [0..1] role ch
+end
+
