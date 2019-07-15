@@ -1,3 +1,4 @@
+reset
 !new Choreographer('Ch');
 !new a_A_Ch ('a');
 !new b_B_Ch ('b');
