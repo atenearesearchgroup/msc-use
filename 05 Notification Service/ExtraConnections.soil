@@ -1,0 +1,2 @@
+!insert (user, ns) into RelUserNotService;
+!insert (ns, provider) into RelNotServiceProvider;

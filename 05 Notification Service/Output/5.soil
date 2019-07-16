@@ -1,0 +1,17 @@
+reset
+!new Choreographer('Ch');
+!new Provider_Ch ('provider');
+!provider.id := 'provider';
+!new NotificationService_Ch ('ns');
+!ns.id := 'ns';
+!new User_Ch ('user');
+!user.id := 'user';
+!insert (provider, Ch) into Rel_Provider_Ch;
+!insert (ns, Ch) into Rel_NotificationService_Ch;
+!insert (user, Ch) into Rel_User_Ch;
+-- EXTRA CONNECTIONS HERE
+
+
+--
+!Ch.notificationservice_subscribe('user', ns);
+!Ch.notificationservice_unsubscribe('user', ns);
