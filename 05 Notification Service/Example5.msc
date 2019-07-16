@@ -1,11 +1,11 @@
-msc Example4
+msc Example5
 (inst user:User, ns:NotificationService, provider:Provider)
 user: call subscribe() to ns;
 ns: receive subscribe() from user;
 ns: replyout subscribe() to user;
 user: replyin subscribe() from ns;
-ns, provider: opt begin opt1;
-	user, file: loop<1,5> begin loop1;
+ns, provider, user: opt begin opt1;
+	user, ns, provider: loop<1,5> begin loop1;
 		provider: call event() to ns;
 		ns: receive event() from provider;
 		ns: replyout event() to provider;

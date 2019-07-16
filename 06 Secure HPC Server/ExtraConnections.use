@@ -1,0 +1,3 @@
+!insert (user, ss) into RelUserSecServer;
+!insert (ss, hpc) into RelSecServerHPCServer;
+!insert (user, hpc) into RelUserHPCServer;

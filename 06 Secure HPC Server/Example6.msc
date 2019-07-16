@@ -1,0 +1,37 @@
+msc Example6
+(inst user:User, hpc:HPCServer, ss:SecurityServer)
+user: call register() to ss;
+ss: receive register() from user;
+ss: replyout register() to user;
+user: replyin register() from ss;
+ss: call isUserOK() to hpc;
+hpc: receive isUserOK() from ss;
+hpc: replyout isUserOK() to ss;
+ss: replyin isUserOK() from hpc;
+ss, hpc, user: opt begin opt1;
+	user: call doTask() to hpc;
+	hpc: receive doTask() from user;
+	hpc: replyout doTask() to user;
+	user: replyin doTask() from hpc;
+	hpc: call isClientRegistered() to ss;
+	ss: receive isClientRegistered() from hpc;
+	ss: replyout isClientRegistered() to hpc;
+	hpc: replyin isClientRegistered() from ss;
+	ns, provider: opt begin opt2;
+		hpc: call resultsOfTask() to user;
+		user: receive resultsOfTask() from hpc;
+		user: replyout resultsOfTask() to hpc;
+		hpc: replyin resultsOfTask() from user;
+		user, file: loop<1,5> begin loop1;
+			user: call doTask() to hpc;
+			hpc: receive doTask() from user;
+			hpc: replyout doTask() to user;
+			user: replyin doTask() from hpc;
+			hpc: call resultsOfTask() to user;
+			user: receive resultsOfTask() from hpc;
+			user: replyout resultsOfTask() to hpc;
+			hpc: replyin resultsOfTask() from user;
+		loop end;
+	opt end;
+opt end;
+endmsc;

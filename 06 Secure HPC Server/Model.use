@@ -1,0 +1,131 @@
+model SecureHPCServer
+class SecurityServer
+attributes
+
+operations
+register() begin end
+isClientRegistered() begin end
+
+end
+
+class User
+attributes 
+
+operations
+resultsOfTask() begin end
+
+end
+
+class HPCServer
+attributes
+
+operations
+isUserOK() begin end
+doTask() begin end
+
+end
+
+association RelUserSecServer between
+    User [0..*] role user
+    SecurityServer [1..*] role secServer
+end
+
+association RelSecServerHPCServer between
+    SecurityServer [1] role secServer
+    HPCServer [0..*] role hpcServer
+end
+
+association RelUserHPCServer between
+    User [0..*] role user
+    HPCServer [1..*] role hpcServer
+end
+
+class Choreographer
+attributes
+
+operations
+securityserver_register(sender : String, receiver : SecurityServer)
+begin
+(self.user->any(ins: User_Ch | ins.id = sender)).securityserver_register(receiver);
+end
+
+hpcserver_doTask(sender : String, receiver : HPCServer)
+begin
+(self.user->any(ins: User_Ch | ins.id = sender)).hpcserver_doTask(receiver);
+end
+
+hpcserver_isUserOK(sender : String, receiver : HPCServer)
+begin
+(self.securityserver->any(ins: SecurityServer_Ch | ins.id = sender)).hpcserver_isUserOK(receiver);
+end
+
+securityserver_isClientRegistered(sender : String, receiver : SecurityServer)
+begin
+(self.hpcserver->any(ins: HPCServer_Ch | ins.id = sender)).securityserver_isClientRegistered(receiver);
+end
+
+user_resultsOfTask(sender : String, receiver : User)
+begin
+(self.hpcserver->any(ins: HPCServer_Ch | ins.id = sender)).user_resultsOfTask(receiver);
+end
+
+end
+
+class User_Ch < User
+attributes
+id : String
+operations
+securityserver_register(receiver : SecurityServer)
+begin
+receiver.register();
+end
+
+hpcserver_doTask(receiver : HPCServer)
+begin
+receiver.doTask();
+end
+
+end
+
+class SecurityServer_Ch < SecurityServer
+attributes
+id : String
+operations
+hpcserver_isUserOK(receiver : HPCServer)
+begin
+receiver.isUserOK();
+end
+
+end
+
+class HPCServer_Ch < HPCServer
+attributes
+id : String
+operations
+securityserver_isClientRegistered(receiver : SecurityServer)
+begin
+receiver.isClientRegistered();
+end
+
+user_resultsOfTask(receiver : User)
+begin
+receiver.resultsOfTask();
+end
+
+end
+
+association Rel_User_Ch between
+User_Ch [0..*] role user
+Choreographer [0..*] role ch
+end
+
+association Rel_SecurityServer_Ch between
+SecurityServer_Ch [0..*] role securityserver
+Choreographer [0..*] role ch
+end
+
+association Rel_HPCServer_Ch between
+HPCServer_Ch [0..*] role hpcserver
+Choreographer [0..*] role ch
+end
+

@@ -1,0 +1,28 @@
+reset
+!new Choreographer('Ch');
+!new SecurityServer_Ch ('ss');
+!ss.id := 'ss';
+!new HPCServer_Ch ('hpc');
+!hpc.id := 'hpc';
+!new User_Ch ('user');
+!user.id := 'user';
+!insert (ss, Ch) into Rel_SecurityServer_Ch;
+!insert (hpc, Ch) into Rel_HPCServer_Ch;
+!insert (user, Ch) into Rel_User_Ch;
+-- EXTRA CONNECTIONS HERE
+
+
+--
+!Ch.securityserver_register('user', ss);
+!Ch.hpcserver_isUserOK('ss', hpc);
+!Ch.hpcserver_doTask('user', hpc);
+!Ch.securityserver_isClientRegistered('hpc', ss);
+!Ch.user_resultsOfTask('hpc', user);
+!Ch.hpcserver_doTask('user', hpc);
+!Ch.user_resultsOfTask('hpc', user);
+!Ch.hpcserver_doTask('user', hpc);
+!Ch.user_resultsOfTask('hpc', user);
+!Ch.hpcserver_doTask('user', hpc);
+!Ch.user_resultsOfTask('hpc', user);
+!Ch.hpcserver_doTask('user', hpc);
+!Ch.user_resultsOfTask('hpc', user);
