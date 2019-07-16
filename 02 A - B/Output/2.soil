@@ -10,5 +10,5 @@ reset
 
 
 --
-!Ch.b_opB('a');
-!Ch.b_opB('a');
+!Ch.b_opB('a', b);
+!Ch.b_opB('a', b);

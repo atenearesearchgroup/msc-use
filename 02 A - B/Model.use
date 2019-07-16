@@ -22,14 +22,14 @@ class Choreographer
 attributes
 
 operations
-b_opB(id : String)
+b_opB(sender : String, receiver : B)
 begin
-(self.a->any(ins: A_Ch | ins.id = id)).b_opB();
+(self.a->any(ins: A_Ch | ins.id = sender)).b_opB(receiver);
 end
 
-a_opA(id : String)
+a_opA(sender : String, receiver : A)
 begin
-(self.b->any(ins: B_Ch | ins.id = id)).a_opA();
+(self.b->any(ins: B_Ch | ins.id = sender)).a_opA(receiver);
 end
 
 end
@@ -38,9 +38,9 @@ class A_Ch < A
 attributes
 id : String
 operations
-b_opB()
+b_opB(receiver : B)
 begin
-self.b.opB();
+receiver.opB();
 end
 
 end
@@ -49,9 +49,9 @@ class B_Ch < B
 attributes
 id : String
 operations
-a_opA()
+a_opA(receiver : A)
 begin
-self.a.opA();
+receiver.opA();
 end
 
 end

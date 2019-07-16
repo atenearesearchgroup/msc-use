@@ -7,6 +7,7 @@ reset
 !insert (a, Ch) into Rel_A_Ch;
 !insert (b, Ch) into Rel_B_Ch;
 -- EXTRA CONNECTIONS HERE
-!insert (a,b) into RelAB;
+
+
 --
-!Ch.b_opB('a');
+!Ch.b_opB('a', b);
