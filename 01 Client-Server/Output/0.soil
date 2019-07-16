@@ -1,13 +1,12 @@
 reset
 !new Server ('s');
 !new Choreographer('Ch');
-!new Client_Ch ('c');
+!new Client_Ch('c');
 !c.id := 'c';
 !insert (c, Ch) into Rel_Client_Ch;
 -- EXTRA CONNECTIONS HERE
-
-
+!insert(c,s) into RelClientServer;
 --
-!Ch.server_serviceA('c');
-!Ch.server_serviceB('c');
-!Ch.server_serviceC('c');
+!Ch.server_serviceA('c', s);
+!Ch.server_serviceB('c', s);
+!Ch.server_serviceC('c', s);

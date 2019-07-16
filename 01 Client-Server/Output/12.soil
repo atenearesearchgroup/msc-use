@@ -8,8 +8,8 @@ reset
 
 
 --
-!Ch.server_serviceA('c');
-!Ch.server_serviceA('c');
-!Ch.server_serviceA('c');
-!Ch.server_serviceB('c');
-!Ch.server_serviceC('c');
+!Ch.server_serviceA('c', s);
+!Ch.server_serviceA('c', s);
+!Ch.server_serviceA('c', s);
+!Ch.server_serviceB('c', s);
+!Ch.server_serviceC('c', s);

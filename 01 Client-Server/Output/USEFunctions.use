@@ -2,19 +2,19 @@ class Choreographer
 attributes
 
 operations
-server_serviceC(id : String)
+server_serviceC(sender : String, receiver : Server)
 begin
-(self.client->any(ins: Client_Ch | ins.id = id)).server_serviceC();
+(self.client->any(ins: Client_Ch | ins.id = sender)).server_serviceC(receiver);
 end
 
-server_serviceA(id : String)
+server_serviceA(sender : String, receiver : Server)
 begin
-(self.client->any(ins: Client_Ch | ins.id = id)).server_serviceA();
+(self.client->any(ins: Client_Ch | ins.id = sender)).server_serviceA(receiver);
 end
 
-server_serviceB(id : String)
+server_serviceB(sender : String, receiver : Server)
 begin
-(self.client->any(ins: Client_Ch | ins.id = id)).server_serviceB();
+(self.client->any(ins: Client_Ch | ins.id = sender)).server_serviceB(receiver);
 end
 
 end
@@ -23,19 +23,19 @@ class Client_Ch < Client
 attributes
 id : String
 operations
-server_serviceC()
+server_serviceC(receiver : Server)
 begin
-self.server.serviceC();
+receiver.serviceC();
 end
 
-server_serviceA()
+server_serviceA(receiver : Server)
 begin
-self.server.serviceA();
+receiver.serviceA();
 end
 
-server_serviceB()
+server_serviceB(receiver : Server)
 begin
-self.server.serviceB();
+receiver.serviceB();
 end
 
 end
