@@ -1,7 +1,7 @@
 model LibrarySystem
 class Borrower
 attributes
-debt : Integer init Integer(0)
+debt : Integer init:0
 
 operations
 
@@ -16,7 +16,106 @@ attributes
 
 operations
 
-borrow(b : Book): Boolean 
+borrow(b : Book)
     begin 
-    
+        delete(self, b) from Available;
+        insert(self, b) into Borrow;
     end
+    pre: self.availableBook->includes(b) and self.borrowedBook->excludes(b)
+    post: self.availableBook->excludes(b) and self.borrowedBook->includes(b)
+
+return(b : Book)
+    begin 
+        delete(self, b) from Borrow;
+        insert(self, b) into Available;
+    end
+    pre: self.availableBook->excludes(b) and self.borrowedBook->includes(b)
+    post: self.availableBook->includes(b) and self.borrowedBook->excludes(b)
+end
+
+class Book
+attributes
+
+operations
+end
+
+association Borrow between
+    Library [0..1] role libBorrow
+    Book [0..*] role borrowedBook
+end
+
+association Available between
+    Library [0..1] role libAvailable
+    Book [0..*] role availableBook
+end
+
+association BorrowerLibrary between
+    Library [0..*] role Library
+    Borrower [0..*] role borrower
+end
+
+constraints
+
+context Library inv AllBooksInTheLibrary:
+    self.borrowedBook->intersection(self.availableBook)->isEmpty()
+
+class Choreographer
+attributes
+
+operations
+library_return(book : Book, sender : String, receiver : Library)
+begin
+(self.borrower->any(ins: Borrower_Ch | ins.id = sender)).library_return(book, receiver);
+end
+
+library_borrow(book : Book, sender : String, receiver : Library)
+begin
+(self.borrower->any(ins: Borrower_Ch | ins.id = sender)).library_borrow(book, receiver);
+end
+
+borrower_fine(sender : String, receiver : Borrower)
+begin
+(self.library->any(ins: Library_Ch | ins.id = sender)).borrower_fine(receiver);
+end
+
+end
+
+class Borrower_Ch < Borrower
+attributes
+id : String
+operations
+library_return(book : Book, receiver : Library)
+begin
+receiver.return(book);
+end
+
+library_borrow(book : Book, receiver : Library)
+begin
+receiver.borrow(book);
+end
+
+end
+
+class Library_Ch < Library
+attributes
+id : String
+operations
+borrower_fine(receiver : Borrower)
+begin
+receiver.fine();
+end
+
+end
+
+association Rel_Borrower_Ch between
+Borrower_Ch [0..*] role borrower
+Choreographer [0..*] role ch
+end
+
+association Rel_Library_Ch between
+Library_Ch [0..*] role library
+Choreographer [0..*] role ch
+end
+
+
+
