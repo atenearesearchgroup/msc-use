@@ -24,24 +24,24 @@ class Choreographer
 attributes
 
 operations
-file_read(id : String)
+file_read(sender : String, receiver : File)
 begin
-(self.user->any(ins: User_Ch | ins.id = id)).file_read();
+(self.user->any(ins: User_Ch | ins.id = sender)).file_read(receiver);
 end
 
-file_close(id : String)
+file_close(sender : String, receiver : File)
 begin
-(self.user->any(ins: User_Ch | ins.id = id)).file_close();
+(self.user->any(ins: User_Ch | ins.id = sender)).file_close(receiver);
 end
 
-file_open(id : String)
+file_open(sender : String, receiver : File)
 begin
-(self.user->any(ins: User_Ch | ins.id = id)).file_open();
+(self.user->any(ins: User_Ch | ins.id = sender)).file_open(receiver);
 end
 
-file_write(id : String)
+file_write(sender : String, receiver : File)
 begin
-(self.user->any(ins: User_Ch | ins.id = id)).file_write();
+(self.user->any(ins: User_Ch | ins.id = sender)).file_write(receiver);
 end
 
 end
@@ -50,24 +50,24 @@ class User_Ch < User
 attributes
 id : String
 operations
-file_read()
+file_read(receiver : File)
 begin
-self.file.read();
+receiver.read();
 end
 
-file_close()
+file_close(receiver : File)
 begin
-self.file.close();
+receiver.close();
 end
 
-file_open()
+file_open(receiver : File)
 begin
-self.file.open();
+receiver.open();
 end
 
-file_write()
+file_write(receiver : File)
 begin
-self.file.write();
+receiver.write();
 end
 
 end
