@@ -1,0 +1,16 @@
+reset
+!new Book ('book');
+!new Choreographer('Ch');
+!new Borrower_Ch ('b');
+!b.id := 'b';
+!new Library_Ch ('lib');
+!lib.id := 'lib';
+!insert (b, Ch) into Rel_Borrower_Ch;
+!insert (lib, Ch) into Rel_Library_Ch;
+-- EXTRA CONNECTIONS HERE
+!insert(lib, book) into  Available;
+!insert(lib, b) into BorrowerLibrary;
+--
+!Ch.library_borrow(book, 'b', lib);
+!Ch.library_return(book, 'b', lib);
+!Ch.borrower_fine(4, 'lib', b);

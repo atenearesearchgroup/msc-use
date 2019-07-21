@@ -1,0 +1,2 @@
+!insert(lib, book) into  Available;
+!insert(lib, b) into BorrowerLibrary;

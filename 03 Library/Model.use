@@ -50,14 +50,9 @@ association Available between
 end
 
 association BorrowerLibrary between
-    Library [0..*] role Library
+    Library [0..*] role library
     Borrower [0..*] role borrower
 end
-
-constraints
-
-context Library inv AllBooksInTheLibrary:
-    self.borrowedBook->intersection(self.availableBook)->isEmpty()
 
 class Choreographer
 attributes
@@ -73,9 +68,9 @@ begin
 (self.borrower->any(ins: Borrower_Ch | ins.id = sender)).library_borrow(book, receiver);
 end
 
-borrower_fine(sender : String, receiver : Borrower)
+borrower_fine(amount : Integer, sender : String, receiver : Borrower)
 begin
-(self.library->any(ins: Library_Ch | ins.id = sender)).borrower_fine(receiver);
+(self.library->any(ins: Library_Ch | ins.id = sender)).borrower_fine(amount, receiver);
 end
 
 end
@@ -100,9 +95,9 @@ class Library_Ch < Library
 attributes
 id : String
 operations
-borrower_fine(receiver : Borrower)
+borrower_fine(amount : Integer, receiver : Borrower)
 begin
-receiver.fine();
+receiver.fine(amount);
 end
 
 end
@@ -118,4 +113,7 @@ Choreographer [0..*] role ch
 end
 
 
+constraints
 
+context Library inv AllBooksInTheLibrary:
+    self.borrowedBook->intersection(self.availableBook)->isEmpty()

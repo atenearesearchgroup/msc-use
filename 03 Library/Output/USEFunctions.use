@@ -1,0 +1,58 @@
+class Choreographer
+attributes
+
+operations
+library_return(book : Book, sender : String, receiver : Library)
+begin
+(self.borrower->any(ins: Borrower_Ch | ins.id = sender)).library_return(book : Book, receiver);
+end
+
+library_borrow(book : Book, sender : String, receiver : Library)
+begin
+(self.borrower->any(ins: Borrower_Ch | ins.id = sender)).library_borrow(book : Book, receiver);
+end
+
+borrower_fine(amount : Integer, sender : String, receiver : Borrower)
+begin
+(self.library->any(ins: Library_Ch | ins.id = sender)).borrower_fine(amount : Integer, receiver);
+end
+
+end
+
+class Borrower_Ch < Borrower
+attributes
+id : String
+operations
+library_return(book : Book, receiver : Library)
+begin
+receiver.return(book);
+end
+
+library_borrow(book : Book, receiver : Library)
+begin
+receiver.borrow(book);
+end
+
+end
+
+class Library_Ch < Library
+attributes
+id : String
+operations
+borrower_fine(amount : Integer, receiver : Borrower)
+begin
+receiver.fine(amount);
+end
+
+end
+
+association Rel_Borrower_Ch between
+Borrower_Ch [0..*] role borrower
+Choreographer [0..*] role ch
+end
+
+association Rel_Library_Ch between
+Library_Ch [0..*] role library
+Choreographer [0..*] role ch
+end
+

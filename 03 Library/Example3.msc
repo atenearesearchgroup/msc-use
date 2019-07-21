@@ -1,5 +1,5 @@
 msc Example3
-(inst b:Borrower, book:Book, lib:Library)
+(inst b:Borrower, book:Book, lib:Library, amount:Integer)
 b: call borrow(book) to lib;
 lib: receive borrow(book) from b;
 lib: replyout borrow(book) to b;
@@ -11,9 +11,9 @@ b, lib, book: opt begin opt1;
 	b: replyin return(book) from lib;
 opt end;
 b, lib, book: opt begin opt2;
-	lib: call fine(20) to b;
-	b: receive fine(20) from lib;
-	b: replyout fine(20) to lib;
-	lib: replyin fine(20) from b;
+	lib: call fine(amount) to b;
+	b: receive fine(amount) from lib;
+	b: replyout fine(amount) to lib;
+	lib: replyin fine(amount) from b;
 opt end;
 endmsc;
