@@ -32,6 +32,6 @@ https://www.eclipse.org/Xtext/download.html
 
 <img src="https://user-images.githubusercontent.com/26405870/83299747-0fa9c600-a1f7-11ea-99a6-55b6a83d75f3.png" width="500">
 
-- You are done! Paste your MSC and the test cases will be generated inside the project.
+- You are done! Paste your MSC in the src folder and the test cases will be automatically generated!
 
 <img src="https://user-images.githubusercontent.com/26405870/83299963-69aa8b80-a1f7-11ea-9a58-421e857b92a4.png" width="500">
